@@ -2,6 +2,8 @@
 ### Script for classification of satellite data
 ### 
 ### based on a script by: Dr. Ned Norning, Dr. Martin Wegmann
+### first version approx. in 2011
+###
 ### www.remote-sensing-biodiversity.org
 ##############################################################################################
 
@@ -10,7 +12,7 @@
 #####################################################################################
 # The script reads a Shapefile holding the samples (defined by: attName).
 
-# Raster image that contains environmental variables (continuous, categorical) (defined by: inImage). 
+# Raster image that contains environmental variables (continuous, categorical) (defined by: satImage). 
 
 # For each sample the data values for that pixel are determied and these data are used to run 
 # the model. 
@@ -54,10 +56,10 @@ loadandinstall("mgcv")
 
 # set your working directory
 # assign path to variable "workingdir"
-workingdir <- ("/...../script/")
+workingdir <- ("/...../script/") # optional
 
 # set working directory using the variable name
-setwd(workingdir)
+setwd(workingdir) # optional
 
 #### path to the shape training data using the relative path
 path_shapefile <- 'vector_data/path/to/file'

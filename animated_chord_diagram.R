@@ -1,3 +1,6 @@
+# code from https://guyabel.com/post/animated-directional-chord-diagrams/
+# with some minor fixes
+
 library(tidyverse)
 d0 <- read_csv(system.file("imr", "reg_flow.csv", package = "migest"))
 d0 

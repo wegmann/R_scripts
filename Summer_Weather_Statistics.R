@@ -1,7 +1,7 @@
 # download and display temperature and precipitation for Germany
 # https://projekte.sueddeutsche.de/artikel/wissen/bilanz-des-sommers-und-der-hitzewelle-2018-e547928/
 # https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
-# written, adapted, modified and commented by Marius Philipp (Hiwi) and Martin Wegmann
+# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (Hiwi, Aug 2018) and Martin Wegmann
 
 ################################
 ### Download from ftp server ###
@@ -39,10 +39,11 @@ result_tidy <- result_tidy[2:length(result_tidy)]
 result_tidy <- result_tidy[c(seq(1,138, by=1))]
 
 # Define output directory of downloads
-# dir.create("DWDdata/")
+# create one if not yet there, warning if it exists
+dir.create("DWDdata/")
 out_dir <- "DWDdata/"
 
-# For loop for downloading all files listed in the ftp-server
+# loop for downloading all files listed in the ftp-server
 for (i in 1:length(result_tidy)) {
   if(file.exists(paste0(out_dir, result_tidy[i]))){
     print(paste0(result_tidy[i], sep=" ", "file already exists"))
@@ -160,9 +161,8 @@ pdf("August_mean_vs_2018.pdf", width = 14, height = 8)
 grid.arrange(p1, p2, ncol=2)
 dev.off()
 
-# nebeneinander plots, gleiche Höhe, aber nur eine legende
-# library(RStoolbox)
-# data(lsat)
+# side-by-side plots, same height, just one legend
+library(RStoolbox)
 df <- ggR(rasterHist_mean, ggObj = FALSE)
 df2 <- ggR(rasterComp, ggObj = FALSE)
 colnames(df)[3] <- colnames(df2)[3] <- "values"
@@ -184,9 +184,10 @@ ggplot(dfab, aes(x,y,fill=values))+geom_raster()+facet_grid(.~band)+
   coord_equal()
 dev.off()
 
-# Create Difference Map
+# compute difference of historical and raster to compare with
 raster_diff <- rasterComp - rasterHist_mean
 
+# Create Difference Map
 p3 <- ggR(raster_diff, geom_raster = T)+
   scale_fill_gradient2(low="blue", mid='yellow', high="red", name ="temp. diff.", na.value = NA)+
   labs(x="",y="")+

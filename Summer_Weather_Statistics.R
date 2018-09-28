@@ -43,7 +43,7 @@ result_tidy <- result_tidy[c(seq(1,138, by=1))]
 dir.create("DWDdata/")
 out_dir <- "DWDdata/"
 
-# loop for downloading all files listed in the ftp-server
+# loop for downloading all files listed in the ftp-server if they do not yet exist in the folder
 for (i in 1:length(result_tidy)) {
   if(file.exists(paste0(out_dir, result_tidy[i]))){
     print(paste0(result_tidy[i], sep=" ", "file already exists"))
@@ -72,11 +72,12 @@ filenames <- paste0(mypath, temp)
 # activate relevant raster packages
 library(sp)
 library(raster)
+
 for (i in 1:length(filenames)){
   if (i == 1){
     # for the first run define our final raster file ...
     current_ascii <- read.asciigrid(filenames[i])
-    # remove the raster in case it already exists
+    # remove the raster in case it already exists to avoid duplicate entries
     rm(my_raster)
     my_raster <- raster(current_ascii)
   } else {
@@ -89,8 +90,8 @@ for (i in 1:length(filenames)){
   }
 }
 
-# check the structure
-my_raster
+# optional to check the structure
+# my_raster
 
 # Change names of raster layers
 # adapt sequence in case you subsetted the data before
@@ -101,6 +102,7 @@ names(my_raster) <- layer_names
 # select range of historical data to subset
 
 # time-series data, to use for temporal aggregation
+# define the first and last year to grab from the time series 
 rasterHist <- my_raster[[grep("1961", layer_names):grep("1990", layer_names)]]
 
 # year for comparison to long term statistics
@@ -114,7 +116,9 @@ my_crs <- "+init=epsg:31467"
 rasterHist@crs <- sp::CRS(my_crs)
 rasterComp@crs <- sp::CRS(my_crs)
 
-# Divide by 10 to get values in ?C as described in the description pdf on the ftp server:
+# for temperature only!
+# do NOT use for precipitation or other datasets
+# Divide by 10 to get values in C as described in the description pdf on the ftp server:
 # ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/air_temperature_mean/
 # DESCRIPTION_gridsgermany_monthly_air_temperature_mean_en.pdf
  rasterHist <- rasterHist/10
@@ -232,7 +236,8 @@ for (i in 1:length(my_years)){
   rm(current_layer, current_mean, i)
 }
 
-my_df
+# optional: check data frame
+# my_df
 
 # Plot resulting dataframe and perform a regression analysis to display a trend line
 pdf("timeseries_mean_temp.pdf",width=15,height=8)
@@ -246,22 +251,29 @@ ggplot(my_df, aes(x=Year, y=Mean_Temp))+
 dev.off()
 
 # #########
-# split if by region and see what the differences are
+# split by region and see what the differences are
 # #########
 
 # plot(my_raster,1)
 
+# download boundary data
 # bnd <- raster::getData("GADM", country='DEU', level=1)
 bnd.utm <- spTransform(bnd, CRS(proj4string(my_raster)))
+
+# visual check
 # plot(bnd.utm,add=T)
 
 bnd.utm.by <- bnd.utm[bnd.utm$NAME_1=="Bayern",]
+
+# visual check
 # plot(my_raster,1)
 # plot(bnd.utm.by,add=T)
 
+# crop and mask the data
 my_raster.by <- crop(my_raster, bnd.utm.by)
 my_raster.by <- mask(my_raster.by, bnd.utm.by)
 
+# visual check
 plot(my_raster.by,1)
 
 # For-loop calculating mean of each raster and save it in data.frame
@@ -272,6 +284,7 @@ for (i in 1:length(my_years)){
   rm(current_layer, current_mean, i)
 }
 
+# check data frame structure/content
 my_df
 
 # Plot resulting dataframe and perform a regression analysis to display a trend line

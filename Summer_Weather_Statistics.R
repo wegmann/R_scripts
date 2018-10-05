@@ -23,7 +23,7 @@ result <- getURL(http, verbose=TRUE, ftp.use.epsv=TRUE, dirlistonly = TRUE)
 # Split string into pieces by identifying certain pattern that seperates the individual filenames
 library(tidyverse)
 
-result_tidy <- str_split(result, "\n")
+result_tidy <- str_split(result, "\n") # sometimes \r needed (MS Windows issue?)
 result_tidy <- result_tidy[[1]]
 
 # Reorder data frame to alphabetically decreasing file names

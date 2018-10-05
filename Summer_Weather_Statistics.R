@@ -2,6 +2,10 @@
 # https://projekte.sueddeutsche.de/artikel/wissen/bilanz-des-sommers-und-der-hitzewelle-2018-e547928/
 # https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
 # Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (EAGLE MSc. student, Hiwi 2018, Aug 2018) and Martin Wegmann
+# 
+# tp-do ideas:
+# loop through months, analyse trend and map it
+
 
 ################################
 ### Download from ftp server ###
@@ -23,7 +27,7 @@ result <- getURL(http, verbose=TRUE, ftp.use.epsv=TRUE, dirlistonly = TRUE)
 # Split string into pieces by identifying certain pattern that seperates the individual filenames
 library(tidyverse)
 
-result_tidy <- str_split(result, "\n") # sometimes \r needed (MS Windows issue?)
+result_tidy <- str_split(result, "\n|\r\n")  # sometimes \r needed
 result_tidy <- result_tidy[[1]]
 
 # Reorder data frame to alphabetically decreasing file names

@@ -1,7 +1,7 @@
 # download and display temperature and precipitation for Germany
 # https://projekte.sueddeutsche.de/artikel/wissen/bilanz-des-sommers-und-der-hitzewelle-2018-e547928/
 # https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
-# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (Hiwi, Aug 2018) and Martin Wegmann
+# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (EAGLE MSc. student, Hiwi 2018, Aug 2018) and Martin Wegmann
 
 ################################
 ### Download from ftp server ###

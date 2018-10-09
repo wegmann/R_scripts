@@ -10,7 +10,8 @@
 # 
 # idea to replicate the news infos by using the weather data of the german weather service
 # 
-# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (EAGLE MSc. student, student assistant Aug/Sept. 2018) and Martin Wegmann
+# Sept./Oct. 2018, written, adapted, modified and commented by 
+# Marius Philipp (EAGLE MSc. student, student assistant Aug/Sept. 2018) and Martin Wegmann
 # 
 # to-do and ideas:
 # make it more generic to select years, months and datasets

@@ -1,10 +1,19 @@
+# ###########
 # download and display temperature and precipitation for Germany
+# ###########
+# 
+# idea triggered by these news articles:
 # https://projekte.sueddeutsche.de/artikel/wissen/bilanz-des-sommers-und-der-hitzewelle-2018-e547928/
 # https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
-# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (EAGLE MSc. student, Hiwi 2018, Aug 2018) and Martin Wegmann
 # 
-# tp-do ideas:
-# loop through months, analyse trend and map it
+# idea to replicate the news infos by using the weather data of the german weather service
+# 
+# Sept./Oct. 2018, written, adapted, modified and commented by Marius Philipp (EAGLE MSc. student, student assistant Aug/Sept. 2018) and Martin Wegmann
+# 
+# to-do and ideas:
+# make it more generic to select years, months and datasets
+# loop through months
+# analyse trend and map it
 
 
 ################################

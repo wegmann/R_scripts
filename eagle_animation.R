@@ -1,6 +1,6 @@
 # EAGLE -> EARTH Observation Animation
 # based on script by https://gist.github.com/emitanaka/ef1d1b6ade5e57acc4734bc4bfbcc0cd
-# adapted to EAGLE MSc. program and Earth Observation
+# adapted to EAGLE MSc. program and Earth Observation by Martin Wegmann
 
 library(readbitmap)
 library(gganimate)
@@ -9,9 +9,9 @@ library(ggplot2)
 
 # import text files (black text, white background)
 # b1 <- read.bitmap("~/eagle.png")
-b1 <- read.bitmap("~/eagle_web.png")
+b1 <- read.bitmap("eagle_web.png")
 # b2 <- read.bitmap("~/eagle_EO.png")
-b2 <- read.bitmap("~/eo.png")
+b2 <- read.bitmap("eo.png")
 
 # adapt imported files to suit ggplot2 requirements
 x1 <- 1 - b1[,,1]
@@ -53,4 +53,4 @@ eagle_eo_anim <- p +
   ease_aes('sine-in-out')    # Tweening movement
 
 # save the animation with specific frames, size etc.
-save_animation(animate(eagle_eo_anim, fps=20, nframes=50, width=1400, height=200), "eagle_eo2.gif")
+save_animation(animate(eagle_eo_anim, fps=20, nframes=50, width=2800, height=400), "eagle_eo.gif")

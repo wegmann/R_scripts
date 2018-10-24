@@ -3,6 +3,7 @@
 # adapted to EAGLE MSc. program and Earth Observation by Martin Wegmann
 
 library(readbitmap)
+
 library(gganimate)
 library(dplyr)
 library(ggplot2)

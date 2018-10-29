@@ -17,6 +17,7 @@
 # make it more generic to select years, months and datasets
 # loop through months
 # analyse trend and map it
+# create animations w/ gganimate and tweenr of time series (maps and line plot), mean temp map and transition to year x map
 
 
 ################################

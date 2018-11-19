@@ -6,6 +6,7 @@
 # 
 # idea triggered by these news articles:
 # https://projekte.sueddeutsche.de/artikel/wissen/bilanz-des-sommers-und-der-hitzewelle-2018-e547928/
+# https://projekte.sueddeutsche.de/artikel/panorama/duerre-in-deutschland-e407144/
 # https://www.nytimes.com/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
 # 
 # idea to replicate the news infos by using the weather data of the german weather service
@@ -15,9 +16,11 @@
 # 
 # to-do and ideas:
 # make it more generic to select years, months and datasets
-# loop through months
+# loop through months and download all
 # analyse trend and map it
 # create animations w/ gganimate and tweenr of time series (maps and line plot), mean temp map and transition to year x map
+# adapt some ideas from this weather in Japan R script: https://ryo-n7.github.io/2018-10-04-visualize-weather-in-japan/
+
 
 
 ################################

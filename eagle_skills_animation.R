@@ -34,7 +34,7 @@ p
 
 p + transition_time(semester) +
   ease_aes('linear')+
-  labs(title = "semester: {closest_state}")+
+#  labs(title = "semester: {closest_state}")+
   shadow_wake(wake_length = 0.1, alpha = FALSE)+
   enter_fade() +
   exit_fade()

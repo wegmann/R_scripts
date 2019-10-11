@@ -32,15 +32,14 @@ p <- ggplot(data=df, aes(y=eoExp, x=progExp, color=eyecol, size=sex))+
 
 p
 
-p + transition_time(semester) +
+p + labs(title ='Semester: {round(frame_time, 0)}')+
+  transition_time(df$semester) +
   ease_aes('linear')+
-#  labs(title = "semester: {closest_state}")+
   shadow_wake(wake_length = 0.1, alpha = FALSE)+
   enter_fade() +
   exit_fade()
-  # enter_grow()+
-  # exit_disappear()
-
+# enter_grow()+
+# exit_disappear()
 
 anim_save("eagle_EO_vs_prog_experiences.gif")
 

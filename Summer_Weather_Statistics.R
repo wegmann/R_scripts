@@ -30,7 +30,8 @@
 # Define http and use the getURL from the RCurl package to list the data
 # In this example I chose the monthly mean temperature, but it can be switched to e.g. precipitation etc.
 # All that needs to be done is change the link to the desired data files
-http <- "ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/air_temperature_mean/08_Aug/"
+#http <- "ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/air_temperature_mean/08_Aug/"
+http <- "ftp://opendata.dwd.de/climate_environment/CDC/grids_germany/monthly/air_temperature_mean/08_Aug/"
 
 # Data for monthly precitpiation in August:
 # http <- "ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/precipitation/08_Aug/"
@@ -58,6 +59,9 @@ result_tidy <- result_tidy[2:length(result_tidy)]
 # 138: 2018
 result_tidy <- result_tidy[c(seq(1,138, by=1))]
 
+# Define working directory
+setwd("C:/Users/mbalt/Desktop/Martin_Test/")
+
 # Define output directory of downloads
 # create one if not yet there, warning if it exists
 dir.create("DWDdata/")
@@ -69,9 +73,9 @@ for (i in 1:length(result_tidy)) {
     print(paste0(result_tidy[i], sep=" ", "file already exists"))
   }
   else
-    {
-  download.file(paste0(http, result_tidy[i]), paste0(out_dir, result_tidy[i]))
-    }
+  {
+    download.file(paste0(http, result_tidy[i]), paste0(out_dir, result_tidy[i]))
+  }
 }
 
 
@@ -141,8 +145,8 @@ rasterComp@crs <- sp::CRS(my_crs)
 # Divide by 10 to get values in C as described in the description pdf on the ftp server:
 # ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/air_temperature_mean/
 # DESCRIPTION_gridsgermany_monthly_air_temperature_mean_en.pdf
- rasterHist <- rasterHist/10
- rasterComp <- rasterComp/10
+rasterHist <- rasterHist/10
+rasterComp <- rasterComp/10
 
 # Calculate mean temperature between 1961 and 1990
 rasterHist_mean <- mean(rasterHist)
@@ -166,7 +170,7 @@ p1 <- ggR(rasterHist_mean, geom_raster = T)+
   scale_y_continuous(breaks = seq(5400000,6000000,200000))+
   xlab("")+
   ylab("")
-  
+
 
 
 p2 <- ggR(rasterComp, geom_raster = T)+
@@ -277,7 +281,7 @@ dev.off()
 # plot(my_raster,1)
 
 # download boundary data
-# bnd <- raster::getData("GADM", country='DEU', level=1)
+bnd <- raster::getData("GADM", country='DEU', level=1)
 bnd.utm <- spTransform(bnd, CRS(proj4string(my_raster)))
 
 # visual check
@@ -299,7 +303,8 @@ plot(my_raster.by,1)
 # For-loop calculating mean of each raster and save it in data.frame
 for (i in 1:length(my_years)){
   current_layer <- my_raster.by[[i]]
-  current_mean <- mean(current_layer@data@values, na.rm=T)
+  # current_mean <- mean(current_layer@data@values, na.rm=T)
+  current_mean <- mean(getValues(current_layer), na.rm=T)
   my_df[i,2] <- current_mean/10
   rm(current_layer, current_mean, i)
 }
@@ -317,4 +322,3 @@ ggplot(my_df, aes(x=Year, y=Mean_Temp))+
        x="Year", y="Mean Temperature in ?C") +
   theme(plot.title = element_text(hjust = 0.5))
 dev.off()
-

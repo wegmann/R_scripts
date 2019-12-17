@@ -33,8 +33,8 @@
 #http <- "ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/air_temperature_mean/08_Aug/"
 http <- "ftp://opendata.dwd.de/climate_environment/CDC/grids_germany/monthly/air_temperature_mean/08_Aug/"
 
-# Data for monthly precitpiation in August:
-# http <- "ftp://ftp-cdc.dwd.de/pub/CDC/grids_germany/monthly/precipitation/08_Aug/"
+# Data for monthly precitpiation in August can be found on the ftp as well:
+# ftp://opendata.dwd.de/climate_environment ...
 
 # List resulting datasets of given url
 # activate library to fetch url infos
@@ -60,7 +60,7 @@ result_tidy <- result_tidy[2:length(result_tidy)]
 result_tidy <- result_tidy[c(seq(1,138, by=1))]
 
 # Define working directory
-setwd("C:/Users/mbalt/Desktop/Martin_Test/")
+setwd("path/to/your/working/directory/")
 
 # Define output directory of downloads
 # create one if not yet there, warning if it exists
